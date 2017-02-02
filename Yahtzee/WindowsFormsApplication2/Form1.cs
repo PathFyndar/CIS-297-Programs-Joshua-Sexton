@@ -48,7 +48,7 @@ namespace WindowsFormsApplication2
                 IsScored = false;
                 rollsDone = 1;
             }
-            //if unchecked, rolls the die
+            //if unchecked, rolls the die. checks all dice
                 if (chkBoxDie1.Checked == false)
                 {
                     dice[0] =roll();
@@ -93,7 +93,9 @@ namespace WindowsFormsApplication2
         //does actual roll of dice
         public int roll()
         {
-            return random.Next(1, 7); //should be 0 or 1 for min?
+            //should be 0 or 1 for minimum number? and 6 or 7 for maximum number?
+            //using six-sided dice
+            return random.Next(1, 7); 
         }
 
         //scores and takes care of Ones points if selected
@@ -289,6 +291,8 @@ namespace WindowsFormsApplication2
         private void bttnRoll_Click(object sender, EventArgs e)
         {
             rollDice();
+
+            //updates all labels to show appropriate values
             labelDie1.Text = dice[0].ToString();
             labelDie2.Text = dice[1].ToString();
             labelDie3.Text = dice[2].ToString();
@@ -296,10 +300,12 @@ namespace WindowsFormsApplication2
             labelDie5.Text = dice[4].ToString();
         }
 
-        //starts new game and resets everything. 
-        //MUST BE DONE FOR GAMES TO WORK PROPERLY
+        //starts new game and RESETS EVERYTHING!!!! 
+        //This MUST BE DONE FOR GAMES TO WORK PROPERLY!!
+        //IN CAPS FOR A REASON!!!
         private void bttnNewGame_Click(object sender, EventArgs e)
         {
+            //resets scores and IsScored
             IsScored = false;
             scoreOnes = 0;
             scoreTwos = 0;
@@ -316,6 +322,7 @@ namespace WindowsFormsApplication2
             scoreYahtzeeBonus = 0;
             scoreChance = 0;
             scoreTotal = 0;
+            //resets labels, clears dice list, creates or re-creates and rolls 5 dice 
             labelTotalScore.Text = scoreTotal.ToString();
             dice.Clear();
             for (int i = 0; i < 5; i++)
@@ -323,6 +330,7 @@ namespace WindowsFormsApplication2
                 dice.Add(roll());
             }
             rollsDone = 1;
+            //re-enables all appropriate buttons
             bttnChance.Enabled = true;
             bttnFives.Enabled = true;
             bttnFourOfAKind.Enabled = true;
@@ -339,6 +347,7 @@ namespace WindowsFormsApplication2
             bttnYahtzee.Enabled = true;
             bttnYahtzeeBonus.Enabled = false;
 
+            //clears labels for scores
             labelChance.Text = "";
             labelOnes.Text = "";
             labelTwos.Text = "";
@@ -417,6 +426,7 @@ namespace WindowsFormsApplication2
 
         //gets and returns sum off all the dice
         //used in several methods
+        //DO NOT DELETE
         public int sumOfAllDice()
         {
             return (dice[0] + dice[1] + dice[2] + dice[3] + dice[4]);
@@ -435,6 +445,7 @@ namespace WindowsFormsApplication2
         }
 
         //checks for Yahtzee
+        //used in yahtzee and yatzee bonus
         public bool IsYahtzee()
         {
             return (dice[0] == dice[1] && dice[1] == dice[2] &&
@@ -479,6 +490,105 @@ namespace WindowsFormsApplication2
             labelTotalScore.Text = scoreTotal.ToString();
             IsScored = true;
         }
+
+        //checks if dice contain 3 of a kind using all possible combinations
+        public bool IsThreeOfAKind()
+        {
+            return ((dice[0] == dice[1] && dice[1] == dice[2])
+                || (dice[0] == dice[1] && dice[1] == dice[3])
+                || (dice[0] == dice[1] && dice[1] == dice[4])
+                || (dice[0] == dice[2] && dice[2] == dice[3])
+                || (dice[0] == dice[2] && dice[2] == dice[4])
+                || (dice[0] == dice[3] && dice[3] == dice[4])
+                || (dice[1] == dice[2] && dice[2] == dice[3])
+                || (dice[1] == dice[2] && dice[2] == dice[4])
+                || (dice[1] == dice[3] && dice[3] == dice[4])
+                || (dice[2] == dice[3] && dice[3] == dice[4]));
+        }
+
+        //checks if dice contain 4 of a kind using all possible combinations
+        public bool IsFourOfAKind()
+        {
+            return ((dice[0] == dice[1] && dice[1] == dice[2] && dice[2] == dice[3])
+                || (dice[0] == dice[1] && dice[1] == dice[2] && dice[2] == dice[4])
+                || (dice[0] == dice[1] && dice[1] == dice[3] && dice[3] == dice[4])
+                || (dice[0] == dice[2] && dice[2] == dice[3] && dice[3] == dice[4])
+                || (dice[1] == dice[2] && dice[2] == dice[3] && dice[3] == dice[4]));
+        }
+
+        //checks if dice contain full house using all possible combinations,
+        //using modified code from IsThreeOfAKind method
+        public bool IsFullHouse()
+        {
+            return ((dice[0] == dice[1] && dice[1] == dice[2] && dice[3] == dice[4])
+                || (dice[0] == dice[1] && dice[1] == dice[3] && dice[2] == dice[4])
+                || (dice[0] == dice[1] && dice[1] == dice[4] && dice[2] == dice[3])
+                || (dice[0] == dice[2] && dice[2] == dice[3] && dice[1] == dice[4])
+                || (dice[0] == dice[2] && dice[2] == dice[4] && dice[1] == dice[3])
+                || (dice[0] == dice[3] && dice[3] == dice[4] && dice[1] == dice[2])
+                || (dice[1] == dice[2] && dice[2] == dice[3] && dice[0] == dice[4])
+                || (dice[1] == dice[2] && dice[2] == dice[4] && dice[0] == dice[3])
+                || (dice[1] == dice[3] && dice[3] == dice[4] && dice[0] == dice[2])
+                || (dice[2] == dice[3] && dice[3] == dice[4] && dice[0] == dice[1]));
+        }
+
+        //handles 3 of a kind button click
+        private void bttnThreeOfAKind_Click(object sender, EventArgs e)
+        {
+            if(IsThreeOfAKind()==true)
+            {
+                scoreThreeOfAKind = sumOfAllDice();
+            }
+            else
+            {
+                scoreThreeOfAKind = 0;
+            }
+            labelThreeOfAKind.Text = scoreThreeOfAKind.ToString();
+            scoreTotal = scoreTotal + scoreThreeOfAKind;
+            bttnThreeOfAKind.Enabled = false;
+            bttnRoll.Enabled = true;
+            labelTotalScore.Text = scoreTotal.ToString();
+            IsScored = true;
+        }
+
+        //handles 4 of a kind button click
+        private void bttnFourOfAKind_Click(object sender, EventArgs e)
+        {
+            if (IsFourOfAKind() == true)
+            {
+                scoreFourOfAKind = sumOfAllDice();
+            }
+            else
+            {
+                scoreFourOfAKind = 0;
+            }
+            labelFourOfAKind.Text = scoreFourOfAKind.ToString();
+            scoreTotal = scoreTotal + scoreFourOfAKind;
+            bttnFourOfAKind.Enabled = false;
+            bttnRoll.Enabled = true;
+            labelTotalScore.Text = scoreTotal.ToString();
+            IsScored = true;
+        }
+        
+        //handles full house button click
+        private void bttnFullHouse_Click(object sender, EventArgs e)
+        {
+            if (IsFullHouse() == true)
+            {
+                scoreFullHouse = 25;
+            }
+            else
+            {
+                scoreFullHouse = 0;
+            }
+            labelFullHouse.Text = scoreFullHouse.ToString();
+            scoreTotal = scoreTotal + scoreFullHouse;
+            bttnFullHouse.Enabled = false;
+            bttnRoll.Enabled = true;
+            labelTotalScore.Text = scoreTotal.ToString();
+            IsScored = true;
+        }
+
         
     }
 }

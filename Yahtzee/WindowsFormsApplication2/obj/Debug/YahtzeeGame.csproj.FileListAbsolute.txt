@@ -7,3 +7,6 @@ F:\CIS297\Yahtzee\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.Pr
 F:\CIS297\Yahtzee\WindowsFormsApplication2\obj\Debug\YahtzeeGame.csproj.GenerateResource.Cache
 F:\CIS297\Yahtzee\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.exe
 F:\CIS297\Yahtzee\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.pdb
+F:\CIS297\CIS-297-Programs-Joshua-Sexton\Yahtzee\WindowsFormsApplication2\bin\Debug\WindowsFormsApplication2.exe.config
+F:\CIS297\CIS-297-Programs-Joshua-Sexton\Yahtzee\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.exe
+F:\CIS297\CIS-297-Programs-Joshua-Sexton\Yahtzee\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.pdb

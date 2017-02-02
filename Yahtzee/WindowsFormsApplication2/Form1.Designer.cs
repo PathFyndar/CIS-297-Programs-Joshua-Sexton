@@ -206,6 +206,7 @@
             this.bttnThreeOfAKind.TabIndex = 13;
             this.bttnThreeOfAKind.Text = "Three of a Kind";
             this.bttnThreeOfAKind.UseVisualStyleBackColor = true;
+            this.bttnThreeOfAKind.Click += new System.EventHandler(this.bttnThreeOfAKind_Click);
             // 
             // bttnFourOfAKind
             // 
@@ -216,6 +217,7 @@
             this.bttnFourOfAKind.TabIndex = 15;
             this.bttnFourOfAKind.Text = "Four of a Kind";
             this.bttnFourOfAKind.UseVisualStyleBackColor = true;
+            this.bttnFourOfAKind.Click += new System.EventHandler(this.bttnFourOfAKind_Click);
             // 
             // labelFourOfAKind
             // 
@@ -235,6 +237,7 @@
             this.bttnFullHouse.TabIndex = 17;
             this.bttnFullHouse.Text = "Full House";
             this.bttnFullHouse.UseVisualStyleBackColor = true;
+            this.bttnFullHouse.Click += new System.EventHandler(this.bttnFullHouse_Click);
             // 
             // labelFullHouse
             // 
